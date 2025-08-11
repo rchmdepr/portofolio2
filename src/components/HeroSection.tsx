@@ -10,12 +10,12 @@ const HeroSection = () => {
                 Hello I'am <span className="text-primary">Rachmad Eka Putra R.</span>.
               </h1>
               <h2 className="text-3xl lg:text-4xl font-semibold text-muted-foreground">
-                Frontend Developer<br />
-                Based In India.
+                Semua saya bisa tergantung mood<br />
+                
               </h2>
             </div>
             
-            <p className="leading-relaxed max-w-md text-zinc-950 text-lg font-medium">Halo, perkenalkan saya adalah mahasiswa Sistem Informasi angkatan 23 di Universitas Ahmad Dahlan. Selama masa perkuliahan, saya aktif mengembangkan kemampuan di bidang public speaking dan web development. Selain itu, saya sangat antusias mengikuti perkembangan teknologi terkini, sehingga selalu berusaha untuk terus belajar dan berinovasi. Dengan kombinasi pengalaman dan minat tersebut, saya berharap dapat memberikan kontribusi positif dalam dunia teknologi dan komunikasi.</p>
+            <p className="leading-relaxed max-w-md text-zinc-950 text-lg font-medium">Hello, let me introduce myself. I'm a 23rd-year Information Systems student at Ahmad Dahlan University. During my studies, I've been actively developing my skills in public speaking and web development. Furthermore, I'm passionate about keeping up with the latest technological developments, constantly striving to learn and innovate. With this combination of experience and interests, I hope to make a positive contribution to the world of technology and communications.</p>
 
             <div className="flex space-x-4">
               <div className="w-12 h-12 bg-primary text-primary-foreground rounded-lg flex items-center justify-center hover:bg-primary/90 transition-colors cursor-pointer">

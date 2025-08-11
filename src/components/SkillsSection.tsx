@@ -1,15 +1,11 @@
 const SkillsSection = () => {
   const skills = [
     { name: "Git", icon: "📁" },
-    { name: "JavaScript", icon: "JS" },
-    { name: "SaxaShop", icon: "🛍️" },
     { name: "Next.js", icon: "▲" },
-    { name: "Storybook", icon: "📚" },
+    { name: "Vercel", icon: "📚" },
     { name: "Node.js", icon: "⬢" },
-    { name: "Git", icon: "📁" },
-    { name: "Storybook", icon: "📚" },
-    { name: "Socket.io", icon: "🔌" },
-    { name: "SaxaShop", icon: "🛍️" },
+    { name: "Vite.io", icon: "🔌" },
+
   ];
 
   return (
