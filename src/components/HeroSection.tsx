@@ -26,7 +26,7 @@ const HeroSection = () => {
           <div className="space-y-8">
             <div className="space-y-4">
               <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
-                Hello I'am <span className="text-primary">Rachmad Eka Putra R.</span>
+                Hello I'am <span className="text-primary">Rachmad</span>
               </h1>
               <h2 className="text-3xl lg:text-4xl font-semibold text-muted-foreground">
                 Good things take time<br />
