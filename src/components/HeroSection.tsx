@@ -1,5 +1,24 @@
 import { Github, Linkedin, Twitter, Instagram } from "lucide-react";
 import heroIllustration from "@/assets/hero-illustration.png";
+
+const socialLinks = [
+  {
+    name: "Github",
+    icon: Github,
+    url: "https://github.com/rchmdepr", // Ganti dengan URL profil Github Anda
+  },
+  {
+    name: "Linkedin",
+    icon: Linkedin,
+    url: "https://www.linkedin.com/in/rachmadekaputraramadhan", // Ganti dengan URL profil Linkedin Anda
+  },
+  {
+    name: "Instagram",
+    icon: Instagram,
+    url: "https://www.instagram.com/rchmdepr_", // Ganti dengan URL profil Instagram Anda
+  },
+];
+
 const HeroSection = () => {
   return <section className="min-h-screen bg-background pt-20 pb-16">
       <div className="container mx-auto px-6 bg-white rounded-3xl">
@@ -7,29 +26,31 @@ const HeroSection = () => {
           <div className="space-y-8">
             <div className="space-y-4">
               <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
-                Hello I'am <span className="text-primary">Rachmad Eka Putra R.</span>.
+                Hello I'am <span className="text-primary">Rachmad Eka Putra R.</span>
               </h1>
               <h2 className="text-3xl lg:text-4xl font-semibold text-muted-foreground">
-                Semua saya bisa tergantung mood<br />
+                Good things take time<br />
                 
               </h2>
             </div>
             
-            <p className="leading-relaxed max-w-md text-zinc-950 text-lg font-medium">Hello, let me introduce myself. I'm a 23rd-year Information Systems student at Ahmad Dahlan University. During my studies, I've been actively developing my skills in public speaking and web development. Furthermore, I'm passionate about keeping up with the latest technological developments, constantly striving to learn and innovate. With this combination of experience and interests, I hope to make a positive contribution to the world of technology and communications.</p>
+            <p className="leading-relaxed max-w-md text-zinc-950 text-lg font-medium">
+              Hi, let me introduce myself. I'm a 23rd-year Information Systems student at Ahmad Dahlan University.
+              During my studies, I've been actively developing my public speaking and web development skills.
+               A goal doesn't require words; it only requires tangible evidence.</p>
 
             <div className="flex space-x-4">
-              <div className="w-12 h-12 bg-primary text-primary-foreground rounded-lg flex items-center justify-center hover:bg-primary/90 transition-colors cursor-pointer">
-                <Github size={20} />
-              </div>
-              <div className="w-12 h-12 bg-primary text-primary-foreground rounded-lg flex items-center justify-center hover:bg-primary/90 transition-colors cursor-pointer">
-                <Linkedin size={20} />
-              </div>
-              <div className="w-12 h-12 bg-primary text-primary-foreground rounded-lg flex items-center justify-center hover:bg-primary/90 transition-colors cursor-pointer">
-                <Twitter size={20} />
-              </div>
-              <div className="w-12 h-12 bg-primary text-primary-foreground rounded-lg flex items-center justify-center hover:bg-primary/90 transition-colors cursor-pointer">
-                <Instagram size={20} />
-              </div>
+              {socialLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 bg-primary text-primary-foreground rounded-lg flex items-center justify-center hover:bg-primary/90 transition-colors"
+                >
+                  <link.icon size={20} />
+                </a>
+              ))}
             </div>
           </div>
 

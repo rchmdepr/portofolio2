@@ -8,8 +8,10 @@ const ContactSection = () => {
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold mb-4">Contact Me</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            I'm always open to discussing new opportunities and interesting projects. 
-            Let's connect and explore how we can work together.
+           I'm always open to discussing new opportunities and exciting projects.
+           Let's connect and explore how we can work together. As I mentioned before,
+           you can contact me directly through Instagram, as I'm more active on Instagram 
+           than any other social media platform.
           </p>
         </div>
 
@@ -42,7 +44,7 @@ const ContactSection = () => {
                     <MapPin size={20} />
                   </div>
                   <div>
-                    <h3 className="font-semibold">Location</h3>
+                    <h3 className="font-semibold">Location Domicile</h3>
                     <p className="text-muted-foreground">Yogyakarta, Indonesia</p>
                   </div>
                 </div>
