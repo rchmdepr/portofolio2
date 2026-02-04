@@ -20,21 +20,20 @@ const AboutSection = () => {
             
             <div className="space-y-4 text-muted-foreground leading-relaxed">
               <p>
-                I'm an information systems student with a passion and a strong desire to become a project manager.
-                 I have skills in web development (not all) such as react.js, git, next.js, vercel, node.js, vite.io.
+                Saya seorang mahasiswa sistem informasi dengan minat dan keinginan yang kuat untuk menjadi seorang manajer proyek.
+                Saya memiliki keterampilan dalam pengembangan web   seperti react.js, git, next.js, vercel, node.js, vite.io.
               </p>
               
               <p>
-                I've been interested in information technology since elementary school, inspired by playing PC games (Point Blank). 
-                I began to wonder how a game could move, and how we could move it. Since then, I've been enthusiastic 
-                about information technology and have delved deeper into it in college, facing new challenges and learning new things, 
-                such as building websites from scratch. As time went on, my hobby expanded, and I began to develop this portfolio.
+                Saya tertarik dengan teknologi informasi sejak sekolah dasar, terinspirasi oleh permainan PC.
+                Saya mulai bertanya-tanya bagaimana sebuah game bisa bergerak, dan bagaimana kita bisa menggerakkannya. Sejak saat itu, saya antusias dengan teknologi informasi dan mendalaminya lebih jauh di perguruan tinggi, menghadapi tantangan baru dan mempelajari hal-hal baru,
+                seperti membangun situs web dari awal. Seiring berjalannya waktu, hobi saya berkembang, dan salah satunya saya mulai mengembangkan portofolio ini.
               </p>
               
               <p>
-                I am more active in updating my day to day life on Instagram than on LinkedIn. Oh yes, one more thing, when you don't find 
-                me in the real world, it means that my life today is focused on fixing existing errors because this error is 
-                already ingrained in my blood🗿.
+               Saya lebih aktif memperbarui kehidupan sehari-hari saya di Instagram daripada di LinkedIn.
+               Oh ya, satu hal lagi, ketika Anda tidak menemukan saya di dunia nyata,
+               itu berarti kehidupan saya hari ini berfokus pada memperbaiki kesalahan yang ada karena kesalahan ini sudah tertanam dalam darah saya🗿.
               </p>
             </div>
           </div>
