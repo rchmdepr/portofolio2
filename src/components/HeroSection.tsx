@@ -1,5 +1,6 @@
 import { Github, Linkedin, Twitter, Instagram } from "lucide-react";
-import heroIllustration from "@/assets/hero-illustration.png";
+// import heroIllustration from "@/assets/hero-illustration.png"; // Dikomentari agar tidak error jika file belum ada
+const heroIllustration = "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80"; // Gambar sementara
 
 const socialLinks = [
   {

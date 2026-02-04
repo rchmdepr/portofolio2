@@ -1,8 +1,7 @@
 import { ExternalLink } from "lucide-react";
-import { StaticImageData } from "next/image";
 
 interface SertifCardProps {
-  imageUrl: StaticImageData | string;
+  imageUrl: string;
   title: string;
   issuer: string;
   url: string;
@@ -10,7 +9,7 @@ interface SertifCardProps {
 
 const SertifCard = ({ imageUrl, title, issuer, url }: SertifCardProps) => {
   // Mengambil path src dari gambar, baik itu string atau objek StaticImageData
-  const imgSrc = typeof imageUrl === "string" ? imageUrl : imageUrl.src;
+  const imgSrc = imageUrl;
 
   return (
     <div className="group relative flex-shrink-0 w-80 md:w-96 bg-slate-900/50 border border-slate-800 rounded-lg overflow-hidden transition-all duration-300 hover:border-primary/70 hover:shadow-lg hover:shadow-primary/20 transform hover:-translate-y-1">

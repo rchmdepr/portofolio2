@@ -1,22 +1,22 @@
 import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
-import SkillsSection from "@/components/SkillsSection";
-import ExperienceSection from "@/components/ExperienceSection";
 import AboutSection from "@/components/AboutSection";
-import ProjectsSection from "@/components/ProjectsSection";
+import ExperienceSection from "@/components/ExperienceSection";
+import SkillsSection from "@/components/SkillsSection";
+import OrganisationalExperience from "@/components/ProjectsSection";
 import ContactSection from "@/components/ContactSection";
 
 const Index = () => {
   return (
-    <div className="min-h-screen">
+    <main className="min-h-screen bg-background">
       <Navigation />
       <HeroSection />
-      <SkillsSection />
-      <ExperienceSection />
       <AboutSection />
-      <ProjectsSection />
+      <ExperienceSection />
+      <SkillsSection />
+      <OrganisationalExperience />
       <ContactSection />
-    </div>
+    </main>
   );
 };
 
