@@ -18,13 +18,9 @@ const AboutSection = () => {
           <div className="space-y-6">
             <h2 className="text-4xl font-bold mb-6">About Me</h2>
             
-            <div className="space-y-4 text-muted-foreground leading-relaxed">
+            <div className="space-y-4 text-muted-foreground leading-relaxed">             
               <p>
-                Saya seorang mahasiswa sistem informasi dengan minat dan keinginan yang kuat untuk menjadi seorang manajer proyek.
-                Saya memiliki keterampilan dalam pengembangan web   seperti react.js, git, next.js, vercel, node.js, vite.io.
-              </p>
-              
-              <p>
+                Saya memiliki keterampilan dalam pengembangan web seperti react.js, git, next.js, vercel, node.js, vite.io.
                 Saya tertarik dengan teknologi informasi sejak sekolah dasar, terinspirasi oleh permainan PC.
                 Saya mulai bertanya-tanya bagaimana sebuah game bisa bergerak, dan bagaimana kita bisa menggerakkannya. Sejak saat itu, saya antusias dengan teknologi informasi dan mendalaminya lebih jauh di perguruan tinggi, menghadapi tantangan baru dan mempelajari hal-hal baru,
                 seperti membangun situs web dari awal. Seiring berjalannya waktu, hobi saya berkembang, dan salah satunya saya mulai mengembangkan portofolio ini.
