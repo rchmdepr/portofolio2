@@ -25,7 +25,7 @@ const DownloadCV = () => {
   };
 
   return (
-    <section className="py-10 bg-background">
+    <section id="download-cv" className="py-10 bg-background">
       <div className="container mx-auto px-6">
         <div className="max-w-2xl mx-auto">
           {/* Terminal Card Container - Design ala IT */}
@@ -41,6 +41,7 @@ const DownloadCV = () => {
               <div className="text-xs text-black font-medium">Download CV saya di sini</div>
               <div className="w-10"></div> {/* Spacer for centering */}
             </div>
+            
 
             {/* Terminal Content */}
             <div className="p-6 space-y-6">
