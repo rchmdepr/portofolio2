@@ -52,10 +52,21 @@ const ContactSection = () => {
             </div>
 
             <div className="space-y-6">
-              <form className="space-y-4">
+              <form 
+                action="https://formsubmit.co/rachmadekaputraramadhan@gmail.com" 
+                method="POST" 
+                className="space-y-4"
+              >
+                {/* Konfigurasi FormSubmit: Mematikan captcha dan mengatur subjek email */}
+                <input type="hidden" name="_captcha" value="false" />
+                <input type="hidden" name="_template" value="table" />
+                <input type="hidden" name="_subject" value="Pesan Baru dari Portofolio!" />
+
                 <div>
                   <input
                     type="text"
+                    name="name"
+                    required
                     placeholder="Your Name"
                     className="w-full px-4 py-3 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-colors"
                   />
@@ -63,18 +74,22 @@ const ContactSection = () => {
                 <div>
                   <input
                     type="email"
+                    name="email"
+                    required
                     placeholder="Your Email"
                     className="w-full px-4 py-3 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-colors"
                   />
                 </div>
                 <div>
                   <textarea
+                    name="message"
+                    required
                     placeholder="Your Message"
                     rows={5}
                     className="w-full px-4 py-3 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-colors resize-none"
                   ></textarea>
                 </div>
-                <Button className="w-full">Send Message</Button>
+                <Button type="submit" className="w-full">Send Message</Button>
               </form>
             </div>
           </div>
