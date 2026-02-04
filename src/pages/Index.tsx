@@ -5,6 +5,7 @@ import ExperienceSection from "@/components/ExperienceSection";
 import SkillsSection from "@/components/SkillsSection";
 import OrganisationalExperience from "@/components/ProjectsSection";
 import ContactSection from "@/components/ContactSection";
+import DownloadCV from "@/components/Download CV ";
 
 const Index = () => {
   return (
@@ -15,6 +16,7 @@ const Index = () => {
       <ExperienceSection />
       <SkillsSection />
       <OrganisationalExperience />
+      <DownloadCV />
       <ContactSection />
     </main>
   );

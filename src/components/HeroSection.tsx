@@ -6,17 +6,17 @@ const socialLinks = [
   {
     name: "Github",
     icon: Github,
-    url: "https://github.com/rchmdepr", // Ganti dengan URL profil Github Anda
+    url: "https://github.com/rchmdepr", // Ganti dengan URL profil Github 
   },
   {
     name: "Linkedin",
     icon: Linkedin,
-    url: "https://www.linkedin.com/in/rachmadekaputraramadhan", // Ganti dengan URL profil Linkedin Anda
+    url: "https://www.linkedin.com/in/rachmadekaputraramadhan", // Ganti dengan URL profil Linkedin 
   },
   {
     name: "Instagram",
     icon: Instagram,
-    url: "https://www.instagram.com/rchmdepr_", // Ganti dengan URL profil Instagram Anda
+    url: "https://www.instagram.com/rchmdepr_", // Ganti dengan URL profil Instagram 
   },
 ];
 
@@ -36,9 +36,12 @@ const HeroSection = () => {
             </div>
             
             <p className="leading-relaxed max-w-md text-zinc-950 text-lg font-medium">
-              Hi, let me introduce myself. I'm a 23rd-year Information Systems student at Ahmad Dahlan University.
-              During my studies, I've been actively developing my public speaking and web development skills.
-               A goal doesn't require words; it only requires tangible evidence.</p>
+              Saya Rachmad Eka Putra Ramadhan, orang-orang mengenal saya sebagai Rachmad. Saya seorang 
+              mahasiswa IT, tepatnya, saat ini sedang menempuh program studi Sistem Informasi. Dengan Pengalaman lebih 
+              dari 1 tahun dalam manajemen proyek,administrasi,serta koordinasi antar tim internal maupun eksternal dan 
+              bukan hal asing lagi dalam manajemen timeline sebuah proyek berjalan. Memiliki latar belakang organisasi lebih 
+              dari 2 tahun yang mengasah soft skill kepemimpinan dan komunikasi secara detail dalam sebuah proyek 
+              maupun non proyek</p>
 
             <div className="flex space-x-4">
               {socialLinks.map((link) => (
