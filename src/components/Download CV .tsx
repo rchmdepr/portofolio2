@@ -17,7 +17,7 @@ const DownloadCV = () => {
       
       // Membuka link Google Drive di tab baru
       // GANTI LINK DI BAWAH INI dengan link Google Drive CV 
-      window.open('https://drive.google.com/file/d/12srt5iBBaA2St2E7lufPV_YqWzM0tjhZ/view?usp=sharing', '_blank');
+      window.open('https://drive.google.com/drive/folders/1xFVP4UihEie3Q0Z_ivMHuhswr0g9XKd_?usp=sharing', '_blank');
 
       // Reset status tombol setelah 3 detik
       setTimeout(() => setIsDownloaded(false), 3000);

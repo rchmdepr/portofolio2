@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
 
 const PictActivity = () => {
   const [activities, setActivities] = useState<any[]>([]);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   // --- KONFIGURASI ---
   // 1. Masukkan Link Folder Google Drive (Pastikan folder Public / Anyone with the link)
@@ -50,6 +53,17 @@ const PictActivity = () => {
   // Menggunakan lh3.googleusercontent.com agar lebih stabil dan menghindari error 403 Forbidden
   const getImageUrl = (id: string) => `https://lh3.googleusercontent.com/d/${id}`;
 
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const { current } = scrollRef;
+      const scrollAmount = current.clientWidth * 0.7; // Geser 70% dari lebar container
+      current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
     <section id="activities" className="py-20 bg-background">
       <div className="container mx-auto px-6">
@@ -60,8 +74,12 @@ const PictActivity = () => {
           </p>
         </div>
 
-        <div className="flex overflow-x-auto gap-6 pb-12 snap-x snap-mandatory max-w-5xl mx-auto px-4">
-          {activities.map((item) => (
+        <div 
+          ref={scrollRef}
+          className="flex overflow-x-auto gap-6 pb-12 snap-x snap-mandatory max-w-5xl mx-auto px-4 [&::-webkit-scrollbar]:hidden"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        >
+          {activities.map((item, index) => (
             <div key={item.id} className="min-w-[85%] md:min-w-[60%] flex-shrink-0 snap-center group">
               
               {/* Tech Card Container */}
@@ -74,7 +92,7 @@ const PictActivity = () => {
                       <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></div>
                       <div className="w-2.5 h-2.5 rounded-full bg-green-500/80"></div>
                    </div>
-                   <div className="text-[10px] font-mono text-slate-500">Preview</div>
+                   <div className="text-[10px] font-mono text-slate-500">FOTO KE_{String(index + 1).padStart(2, '0')} / {String(activities.length).padStart(2, '0')}</div>
                 </div>
 
                 {/* Container Foto dengan Efek Monitor */}
@@ -104,6 +122,25 @@ const PictActivity = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Tombol Navigasi Modern */}
+        <div className="flex justify-center gap-6 mt-2">
+          <button 
+            onClick={() => scroll('left')}
+            className="group p-4 rounded-full bg-background/50 border border-slate-800 text-slate-400 hover:text-primary hover:border-primary hover:bg-slate-900/80 backdrop-blur-sm transition-all duration-300 shadow-lg hover:shadow-primary/20 active:scale-95"
+            aria-label="Previous slide"
+          >
+            <ChevronLeft className="w-6 h-6 group-hover:-translate-x-1 transition-transform" />
+          </button>
+          
+          <button 
+            onClick={() => scroll('right')}
+            className="group p-4 rounded-full bg-background/50 border border-slate-800 text-slate-400 hover:text-primary hover:border-primary hover:bg-slate-900/80 backdrop-blur-sm transition-all duration-300 shadow-lg hover:shadow-primary/20 active:scale-95"
+            aria-label="Next slide"
+          >
+            <ChevronRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+          </button>
         </div>
       </div>
     </section>

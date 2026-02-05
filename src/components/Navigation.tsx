@@ -46,7 +46,13 @@ const Navigation = () => {
                 CV
             </button>
             <button
-              onClick={() => scrollToSection('contact')}
+            onClick={() => scrollToSection('activities')}
+              className="text-foreground hover:text-primary transition-colors"
+            >
+              Pict Activity
+            </button>
+            <button
+            onClick={() => scrollToSection('contact')}
               className="text-foreground hover:text-primary transition-colors"
             >
               Contact Me

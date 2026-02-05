@@ -6,7 +6,7 @@ const AboutSection = () => {
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
           <div className="flex justify-center">
-            <div className="w-80 h-80 border-2 border-border rounded-lg overflow-hidden">
+            <div className="text-black w-80 h-80 border-2 border-border rounded-lg overflow-hidden">
               <img 
                 src={aboutPortrait} 
                 alt="About me portrait" 
@@ -18,7 +18,7 @@ const AboutSection = () => {
           <div className="space-y-6">
             <h2 className="text-4xl font-bold mb-6">About Me</h2>
             
-            <div className="space-y-4 text-muted-foreground leading-relaxed">             
+            <div className=" text-black space-y-4 text-muted-foreground leading-relaxed">             
               <p>
                 Saya memiliki keterampilan dalam pengembangan web seperti react.js, git, next.js, vercel, node.js, vite.io.
                 Saya tertarik dengan teknologi informasi sejak sekolah dasar, terinspirasi oleh permainan PC.
