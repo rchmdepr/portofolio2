@@ -19,8 +19,8 @@ const ContactSection = () => {
           <div className="grid md:grid-cols-2 gap-12">
             <div className="space-y-8">
               <div className="space-y-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-primary text-primary-foreground rounded-lg flex items-center justify-center">
+                <div className="flex items-center gap-4 p-4 rounded-xl bg-card border border-border/50 shadow-sm">
+                  <div className="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center">
                     <Mail size={20} />
                   </div>
                   <div>
@@ -29,8 +29,8 @@ const ContactSection = () => {
                   </div>
                 </div>
                 
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-primary text-primary-foreground rounded-lg flex items-center justify-center">
+                <div className="flex items-center gap-4 p-4 rounded-xl bg-card border border-border/50 shadow-sm">
+                  <div className="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center">
                     <Phone size={20} />
                   </div>
                   <div>
@@ -39,8 +39,8 @@ const ContactSection = () => {
                   </div>
                 </div>
                 
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-primary text-primary-foreground rounded-lg flex items-center justify-center">
+                <div className="flex items-center gap-4 p-4 rounded-xl bg-card border border-border/50 shadow-sm">
+                  <div className="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center">
                     <MapPin size={20} />
                   </div>
                   <div>
@@ -55,7 +55,7 @@ const ContactSection = () => {
               <form 
                 action="https://formsubmit.co/rachmadekaputraramadhan@gmail.com" 
                 method="POST" 
-                className="space-y-4"
+                className="space-y-4 bg-card p-8 rounded-2xl border border-border/50 shadow-lg"
               >
                 {/* Konfigurasi FormSubmit: Mematikan captcha dan mengatur subjek email */}
                 <input type="hidden" name="_captcha" value="false" />
@@ -68,7 +68,7 @@ const ContactSection = () => {
                     name="name"
                     required
                     placeholder="Your Name"
-                    className="w-full px-4 py-3 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-colors"
+                    className="w-full px-4 py-3 border border-border rounded-lg bg-secondary/30 focus:bg-background focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
                   />
                 </div>
                 <div>
@@ -77,7 +77,7 @@ const ContactSection = () => {
                     name="email"
                     required
                     placeholder="Your Email"
-                    className="w-full px-4 py-3 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-colors"
+                    className="w-full px-4 py-3 border border-border rounded-lg bg-secondary/30 focus:bg-background focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
                   />
                 </div>
                 <div>
@@ -86,7 +86,7 @@ const ContactSection = () => {
                     required
                     placeholder="Your Message"
                     rows={5}
-                    className="w-full px-4 py-3 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-colors resize-none"
+                    className="w-full px-4 py-3 border border-border rounded-lg bg-secondary/30 focus:bg-background focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all resize-none"
                   ></textarea>
                 </div>
                 <Button type="submit" className="w-full">Send Message</Button>

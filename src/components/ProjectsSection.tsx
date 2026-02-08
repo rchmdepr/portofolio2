@@ -1,3 +1,6 @@
+import { motion } from "framer-motion";
+import { Calendar, MapPin, Terminal, GitBranch } from "lucide-react";
+
 const OrganisationalExperience = () => {
   const experiences = [
     {
@@ -45,41 +48,96 @@ const OrganisationalExperience = () => {
   ];
 
   return (
-    <section id="projects" className="py-20 bg-dark-bg text-dark-foreground font-sans">
+    <section id="projects" className="py-24 bg-zinc-950 relative overflow-hidden">
+      {/* Background Pattern - Minimalist Grid */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#3f3f4620_1px,transparent_1px),linear-gradient(to_bottom,#3f3f4620_1px,transparent_1px)] bg-[size:24px_24px] -z-10"></div>
+
       <div className="container mx-auto px-6">
-        <div className="max-w-4xl mx-auto">
-          <div className="mb-12 border-b-2 border-dark-foreground pb-2">
-            <h2 className="text-3xl font-bold tracking-tight">Organisational Experience</h2>
-          </div>
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white tracking-tight">
+            Organisational <span className="text-zinc-500">Experience</span>
+          </h2>
+          <div className="h-1 w-20 bg-white mx-auto rounded-full"></div>
+          <p className="text-zinc-400 max-w-2xl mx-auto mt-4">
+            Beberapa pengalaman organisasi yang berkesan yang saya jalani selama sejauh ini.
+          </p>
+        </motion.div>
 
-          <div className="space-y-12">
-            {experiences.map((exp, index) => (
-              <div key={index} className="relative">
+        <div className="grid gap-8 max-w-4xl mx-auto">
+          {experiences.map((exp, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="group relative bg-zinc-900/50 backdrop-blur-sm border border-zinc-800 rounded-2xl overflow-hidden hover:border-zinc-600 transition-all duration-500 hover:bg-zinc-900"
+            >
+              {/* Decorative line on left */}
+              <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-white to-zinc-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+              <div className="p-6 md:p-8">
                 {/* Header: Nama Org & Periode */}
-                <div className="flex flex-col md:flex-row md:justify-between md:items-baseline mb-2">
-                  <h3 className="text-xl font-bold">
-                    {exp.orgName} <span className="text-dark-foreground/50 font-normal mx-2">- {exp.location}</span>
-                  </h3>
-                  <span className="text-sm font-semibold text-dark-foreground/80">{exp.period}</span>
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+                  <div>
+                    <div className="flex items-center gap-2 text-zinc-400 mb-2">
+                      <GitBranch size={18} />
+                      <span className="font-mono text-sm font-medium tracking-wider text-zinc-400">
+                        {exp.orgName}
+                      </span>
+                    </div>
+                    <h3 className="text-2xl font-bold text-white group-hover:text-zinc-200 transition-colors">
+                      {exp.position}
+                    </h3>
+                  </div>
+                  
+                  <div className="flex flex-col items-start md:items-end gap-2">
+                    <div className="flex items-center gap-2 text-sm text-zinc-300 bg-zinc-800/50 px-3 py-1 rounded-full border border-zinc-700">
+                      <Calendar size={14} className="text-white" />
+                      <span className="font-mono text-xs">{exp.period}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-xs text-zinc-500">
+                      <MapPin size={12} />
+                      <span>{exp.location}</span>
+                    </div>
+                  </div>
                 </div>
-
-                {/* Jabatan */}
-                <p className="text-lg italic font-medium mb-3 text-dark-foreground/90">{exp.position}</p>
 
                 {/* Deskripsi & Poin */}
-                <div className="space-y-4">
-                  <p className="text-sm text-dark-foreground/70 leading-relaxed text-justify">
+                <div className="space-y-6">
+                  <p className="text-zinc-400 leading-relaxed">
                     {exp.description}
                   </p>
-                  <ul className="list-disc list-outside ml-5 space-y-2 text-dark-foreground/80 text-sm">
-                    {exp.achievements.map((item, idx) => (
-                      <li key={idx} className="leading-relaxed">{item}</li>
-                    ))}
-                  </ul>
+                  
+                  {/* Code-like Achievements Block */}
+                  <div className="bg-black/40 rounded-xl p-5 border border-zinc-800 font-mono text-sm relative group-hover:border-zinc-700 transition-colors">
+                    <div className="absolute top-3 right-3 flex gap-1.5">
+                      <div className="w-2 h-2 rounded-full bg-zinc-700"></div>
+                      <div className="w-2 h-2 rounded-full bg-zinc-700"></div>
+                    </div>
+                    <h4 className="text-zinc-500 mb-3 flex items-center gap-2 text-xs uppercase tracking-widest">
+                      <Terminal size={12} />
+                      Key Achievements
+                    </h4>
+                    <ul className="space-y-3">
+                      {exp.achievements.map((item, idx) => (
+                        <li key={idx} className="flex items-start gap-3 text-zinc-300">
+                          <span className="text-white mt-0.5">➜</span>
+                          <span className="leading-relaxed opacity-90">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
               </div>
-            ))}
-          </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
