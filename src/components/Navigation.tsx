@@ -5,9 +5,8 @@ import { Music, Volume2, X, Search, Loader2, Pause, Minus, ChevronDown, SkipForw
 // API Key untuk YouTube Data API (Diambil dari referensi project Anda)
 const API_KEY = "AIzaSyBfeailKaZY7Ghp3DYdbckRf3K2YqxUaU0"; // <-- TEMPEL KODE API KEY BARU ANDA DI SINI (Hapus teks ini dan paste kodenya)
 
-// ID Video Default (Placeholder: HYBS - Ride). 
-// Ganti "bC8EmPA6H6g" dengan ID video S.U.T. - Riding jika Anda sudah menemukannya.
-const DEFAULT_VIDEO_ID = "bC8EmPA6H6g"; 
+// ID Video Default (Ed Sheeran - Photograph)
+const DEFAULT_VIDEO_ID = "nSDgHBxUbVQ"; 
 
 // Daftar lagu untuk Auto-play setelah lagu yang dicari selesai
 const RECOMMENDED_PLAYLIST = [
@@ -161,7 +160,7 @@ declare global {
 const Navigation = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentVideoId, setCurrentVideoId] = useState<string | null>(DEFAULT_VIDEO_ID);
-  const [currentVideoTitle, setCurrentVideoTitle] = useState<string>("Riding - S.U.T. (Placeholder)");
+  const [currentVideoTitle, setCurrentVideoTitle] = useState<string>("Photograph - Ed Sheeran");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isPlayerOpen, setIsPlayerOpen] = useState(false); // State untuk dropdown player di desktop
   const [searchQuery, setSearchQuery] = useState("");
