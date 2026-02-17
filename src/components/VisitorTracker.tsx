@@ -9,8 +9,8 @@ const VisitorTracker = () => {
   // Namespace unik agar data tidak bentrok dengan orang lain
   const NAMESPACE = "rachmad.vercel.app";
   const KEY = "visits";
-  // Ganti string di bawah ini dengan URL Web App dari Google Apps Script yang Anda buat (Lihat instruksi)
-  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyiEwSFqEpyZUG3GTw0mVbWkR5Uc9mS6GgA5rJFZ4lCiobMLPzkoNvFWGB3cTRJlPTq/exec";
+  // URL Google Apps Script Web App
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxHoPtzp06sO5WcF5xWn2D9aLHBsrjM5Vcsgf8Ph4IhCdPKAzab22wQYi_7RpiNaUZP/exec";
 
   useEffect(() => {
     const trackVisitor = async () => {
@@ -33,7 +33,8 @@ const VisitorTracker = () => {
             try {
               const locRes = await fetch("https://ipapi.co/json/");
               const locData = await locRes.json();
-              locationInfo = `${locData.city}, ${locData.region}, ${locData.country_name}`;
+              // Format lebih detail: IP - Kota, Wilayah, Negara (ISP/Provider)
+              locationInfo = `${locData.ip} - ${locData.city}, ${locData.region}, ${locData.country_name} (${locData.org})`;
             } catch (e) {
               console.error("Gagal mengambil lokasi:", e);
             }
