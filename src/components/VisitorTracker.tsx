@@ -17,10 +17,8 @@ const VisitorTracker = () => {
       try {
         console.log("VisitorTracker: Memulai tracking...");
 
-        // --- DEBUG MODE: SAYA MATIKAN SESSION STORAGE AGAR DATA SELALU TERKIRIM SAAT REFRESH ---
-        // Jika sudah fix, nanti bisa diaktifkan lagi baris di bawah ini:
-        // const hasVisited = sessionStorage.getItem("hasVisitedSession");
-        const hasVisited = false; // Selalu dianggap pengunjung baru untuk testing
+        // 1. Cek Session Storage agar tidak menghitung/spam data saat refresh halaman
+        const hasVisited = sessionStorage.getItem("hasVisitedSession");
 
         if (!hasVisited) {
           console.log("VisitorTracker: Pengunjung baru (atau debug mode). Mengambil counter...");
@@ -38,8 +36,12 @@ const VisitorTracker = () => {
             try {
               const locRes = await fetch("https://ipapi.co/json/");
               const locData = await locRes.json();
-              // Format lebih detail: IP - Kota, Wilayah, Negara (ISP/Provider)
-              locationInfo = `${locData.ip} - ${locData.city}, ${locData.region}, ${locData.country_name} (${locData.org})`;
+              
+              // Ambil koordinat estimasi dari IP (Tanpa Izin Popup)
+              const mapsLink = `https://www.google.com/maps?q=${locData.latitude},${locData.longitude}`;
+
+              // Format lebih detail: IP - Kota, Wilayah, Negara (ISP/Provider) + Link Maps
+              locationInfo = `${locData.ip} - ${locData.city}, ${locData.region}, ${locData.country_name} (${locData.org}) | 📍 Est: ${mapsLink}`;
               console.log("VisitorTracker: Lokasi didapat:", locationInfo);
             } catch (e) {
               console.error("Gagal mengambil lokasi:", e);
