@@ -7,6 +7,7 @@ import OrganisationalExperience from "@/components/ProjectsSection";
 import ContactSection from "@/components/ContactSection";
 import DownloadCV from "@/components/Download CV ";
 import PictActivity from "@/components/Pict Activity";
+import VisitorTracker from "@/components/VisitorTracker";
 
 
 const Index = () => {
@@ -21,6 +22,7 @@ const Index = () => {
       <DownloadCV />
       <PictActivity />
       <ContactSection />
+      <VisitorTracker />
     </main>
   );
 };
