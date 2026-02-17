@@ -77,7 +77,8 @@ const VisitorTracker = () => {
         setIsVisible(true);
 
       } catch (error) {
-        console.error("Tracker Error:", error);
+        // Ubah error menjadi warn agar tidak terlihat merah/rusak di console saat terkena AdBlock
+        console.warn("Visitor Tracker blocked (likely by AdBlock/Extension). Using fallback.");
         // Fallback: Tetap tampilkan widget (angka 1) jika API gagal/kena AdBlock
         setCount(1);
         setIsVisible(true);

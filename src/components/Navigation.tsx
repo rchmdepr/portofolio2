@@ -189,7 +189,8 @@ const Navigation = () => {
           'autoplay': 1,
           'controls': 0,
           'loop': 1, // Loop default song
-          'playlist': DEFAULT_VIDEO_ID // Diperlukan agar loop berfungsi di iframe API
+          'playlist': DEFAULT_VIDEO_ID, // Diperlukan agar loop berfungsi di iframe API
+          'origin': window.location.origin // Menambahkan origin untuk mengurangi warning postMessage
         },
         events: {
           'onReady': onPlayerReady,
