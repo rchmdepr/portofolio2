@@ -9,7 +9,8 @@ const VisitorTracker = () => {
   // Namespace unik agar data tidak bentrok dengan orang lain
   const NAMESPACE = "rachmad.vercel.app";
   const KEY = "visits";
-  const EMAIL_TARGET = "rachmadekaputraramadhan@gmail.com";
+  // Ganti string di bawah ini dengan URL Web App dari Google Apps Script yang Anda buat (Lihat instruksi)
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyiEwSFqEpyZUG3GTw0mVbWkR5Uc9mS6GgA5rJFZ4lCiobMLPzkoNvFWGB3cTRJlPTq/exec";
 
   useEffect(() => {
     const trackVisitor = async () => {
@@ -27,23 +28,27 @@ const VisitorTracker = () => {
           if (countData && countData.count) {
             setCount(countData.count);
             
-            // B. Kirim Email Notifikasi (Background Process)
-            // Menggunakan FormSubmit AJAX endpoint
-            await fetch(`https://formsubmit.co/ajax/${EMAIL_TARGET}`, {
+            // Coba ambil data lokasi pengunjung
+            let locationInfo = "Tidak terdeteksi";
+            try {
+              const locRes = await fetch("https://ipapi.co/json/");
+              const locData = await locRes.json();
+              locationInfo = `${locData.city}, ${locData.region}, ${locData.country_name}`;
+            } catch (e) {
+              console.error("Gagal mengambil lokasi:", e);
+            }
+
+            // B. Kirim Data ke Google Spreadsheet (via Apps Script)
+            const formData = new FormData();
+            formData.append("timestamp", new Date().toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' }));
+            formData.append("visitor_count", countData.count.toString());
+            formData.append("location", locationInfo);
+            formData.append("device_info", navigator.userAgent);
+
+            await fetch(GOOGLE_SCRIPT_URL, {
               method: "POST",
-              headers: { 
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-              },
-              body: JSON.stringify({
-                _subject: `🚀 New Visitor! Total: ${countData.count}`,
-                _captcha: "false",
-                _template: "table",
-                message: `Seseorang baru saja membuka website rachmad.vercel.app`,
-                total_visitors: countData.count,
-                time: new Date().toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' }),
-                device_info: navigator.userAgent
-              })
+              body: formData,
+              mode: "no-cors" // Penting: mode no-cors agar tidak diblokir browser saat kirim ke Google Script
             });
 
             // Tandai sesi ini sudah dihitung
