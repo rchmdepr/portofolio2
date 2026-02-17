@@ -10,7 +10,7 @@ const VisitorTracker = () => {
   const NAMESPACE = "rachmad.vercel.app";
   const KEY = "visits";
   // URL Google Apps Script Web App
-  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwtmX--NEHx7STV-E0QsfOAPvKcnYzR5Cb77U4NaidFNg4c_Inij1EV_OHnCX84xWE/exec";
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz2aJR-LCVBITKsoji1PuFEgCALzi-IFKMOCxuezJUReatVTtHXEi8HI8mBJ-gab0TB/exec";
 
   useEffect(() => {
     const trackVisitor = async () => {
