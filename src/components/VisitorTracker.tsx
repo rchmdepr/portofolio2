@@ -61,36 +61,53 @@ const VisitorTracker = () => {
             let os = "Unknown OS";
             let device = "Unknown Device";
 
-            if (ua.includes("Win")) {
-                os = "Windows";
-                device = "PC/Laptop";
-            } else if (ua.includes("Mac") && !ua.includes("iPhone") && !ua.includes("iPad")) {
-                os = "MacOS";
-                device = "Macbook/iMac";
-            } else if (ua.includes("Linux") && !ua.includes("Android")) {
-                os = "Linux";
+            if (ua.includes("Windows")) {
+                // Deteksi Versi Windows
+                if (ua.includes("Windows NT 10.0")) os = "Windows 10/11";
+                else if (ua.includes("Windows NT 6.3")) os = "Windows 8.1";
+                else if (ua.includes("Windows NT 6.2")) os = "Windows 8";
+                else if (ua.includes("Windows NT 6.1")) os = "Windows 7";
+                else os = "Windows";
+                
                 device = "PC/Laptop";
             } else if (ua.includes("Android")) {
-                os = "Android";
-                // Coba deteksi brand HP berdasarkan keyword umum di UA
-                if (ua.includes("Samsung") || ua.includes("SM-")) device = "Samsung";
-                else if (ua.includes("Oppo") || ua.includes("CPH")) device = "Oppo";
-                else if (ua.includes("Vivo") || ua.includes("V2")) device = "Vivo";
-                else if (ua.includes("Redmi") || ua.includes("Xiaomi")) device = "Xiaomi/Redmi";
-                else if (ua.includes("Realme") || ua.includes("RMX")) device = "Realme";
-                else if (ua.includes("Infinix")) device = "Infinix";
-                else {
-                    // Coba ambil model dari string UA: "... Android 10; ModelName Build/..."
-                    const match = ua.match(/Android\s[^;]+;\s([^)]+)/);
-                    if (match && match[1]) {
-                        device = match[1].split(" Build")[0].trim(); 
-                    } else {
-                        device = "Android Device";
-                    }
+                // Deteksi Versi Android
+                const androidVer = ua.match(/Android\s([0-9.]+)/);
+                os = androidVer ? `Android ${androidVer[1]}` : "Android";
+
+                // Deteksi Model HP (Samsung SM-xxx, M2004J19C, dll)
+                // Pola umum: "; <Model> Build/"
+                const modelMatch = ua.match(/;\s([^;]+)\sBuild/);
+                if (modelMatch && modelMatch[1]) {
+                    device = modelMatch[1].trim();
+                } else {
+                    // Fallback jika pola build tidak ketemu
+                    if (ua.includes("Samsung") || ua.includes("SM-")) device = "Samsung Device";
+                    else if (ua.includes("Oppo")) device = "Oppo Device";
+                    else if (ua.includes("Vivo")) device = "Vivo Device";
+                    else if (ua.includes("Redmi") || ua.includes("Xiaomi")) device = "Xiaomi/Redmi";
+                    else if (ua.includes("Realme")) device = "Realme";
+                    else if (ua.includes("Infinix")) device = "Infinix";
+                    else device = "Android Device";
                 }
             } else if (ua.includes("iPhone") || ua.includes("iPad") || ua.includes("iPod")) {
-                os = "iOS";
-                device = ua.includes("iPad") ? "iPad" : "iPhone";
+                // Deteksi Versi iOS
+                const iosVer = ua.match(/OS\s([\d_]+)\slike\sMac\sOS\sX/);
+                const version = iosVer ? iosVer[1].replace(/_/g, '.') : "";
+                os = `iOS ${version}`;
+                
+                if (ua.includes("iPhone")) device = "iPhone";
+                else if (ua.includes("iPad")) device = "iPad";
+                else if (ua.includes("iPod")) device = "iPod";
+            } else if (ua.includes("Mac OS X")) {
+                // Deteksi Versi macOS
+                const macVer = ua.match(/Mac\sOS\sX\s([\d_]+)/);
+                const version = macVer ? macVer[1].replace(/_/g, '.') : "";
+                os = `macOS ${version}`;
+                device = "Mac";
+            } else if (ua.includes("Linux")) {
+                os = "Linux";
+                device = "PC/Laptop";
             }
 
             // 2. Deteksi Browser (Urutan penting)
