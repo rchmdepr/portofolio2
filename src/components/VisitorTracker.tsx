@@ -40,15 +40,16 @@ const VisitorTracker = () => {
             }
 
             // B. Kirim Data ke Google Spreadsheet (via Apps Script)
-            const formData = new FormData();
-            formData.append("timestamp", new Date().toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' }));
-            formData.append("visitor_count", countData.count.toString());
-            formData.append("location", locationInfo);
-            formData.append("device_info", navigator.userAgent);
+            // Menggunakan URLSearchParams agar lebih stabil diterima Google Apps Script
+            const data = new URLSearchParams();
+            data.append("timestamp", new Date().toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' }));
+            data.append("visitor_count", countData.count.toString());
+            data.append("location", locationInfo);
+            data.append("device_info", navigator.userAgent);
 
             await fetch(GOOGLE_SCRIPT_URL, {
               method: "POST",
-              body: formData,
+              body: data,
               mode: "no-cors" // Penting: mode no-cors agar tidak diblokir browser saat kirim ke Google Script
             });
 
