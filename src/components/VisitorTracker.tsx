@@ -15,98 +15,59 @@ const VisitorTracker = () => {
   useEffect(() => {
     const trackVisitor = async () => {
       try {
+        console.log("VisitorTracker: Memulai tracking...");
+
         // 1. Cek Session Storage agar tidak menghitung/spam data saat refresh halaman
-        // Menggunakan sessionStorage agar izin lokasi tidak muncul terus menerus setiap refresh
         const hasVisited = sessionStorage.getItem("hasVisitedSession");
 
         if (!hasVisited) {
+          console.log("VisitorTracker: Pengunjung baru (atau debug mode). Mengambil counter...");
           
           // A. Increment Counter (Naikkan Jumlah)
           const countRes = await fetch(`https://api.counterapi.dev/v1/${NAMESPACE}/${KEY}/up`);
           const countData = await countRes.json();
+          console.log("VisitorTracker: Counter API response:", countData);
           
           if (countData && countData.count) {
             setCount(countData.count);
             
-            // --- DETEKSI LOKASI (GPS REAL) ---
+            // Coba ambil data lokasi pengunjung
             let locationInfo = "Tidak terdeteksi";
-            
-            // Helper: Promise untuk mendapatkan GPS
-            const getGPSLocation = () => new Promise<string | null>((resolve) => {
-              if (!navigator.geolocation) {
-                resolve(null);
-                return;
-              }
-              navigator.geolocation.getCurrentPosition(
-                (position) => {
-                  const { latitude, longitude } = position.coords;
-                  // Buat link Google Maps
-                  resolve(`https://www.google.com/maps?q=${latitude},${longitude}`);
-                },
-                (error) => {
-                  console.warn("GPS ditolak/error:", error.message);
-                  resolve(null);
-                },
-                { enableHighAccuracy: true, timeout: 5000 }
-              );
-            });
-
             try {
-              // 1. Coba ambil GPS dulu
-              const gpsLink = await getGPSLocation();
+              const locRes = await fetch("https://ipapi.co/json/");
+              const locData = await locRes.json();
               
-              if (gpsLink) {
-                locationInfo = `📍 GPS Real: ${gpsLink}`;
-              } else {
-                // 2. Fallback ke IP Address jika GPS ditolak
-                const locRes = await fetch("https://ipapi.co/json/");
-                const locData = await locRes.json();
-                locationInfo = `🌐 IP Location: ${locData.ip} - ${locData.city}, ${locData.region}, ${locData.country_name} (${locData.org})`;
-              }
+              // Ambil koordinat estimasi dari IP (Tanpa Izin Popup)
+              const mapsLink = `https://www.google.com/maps?q=${locData.latitude},${locData.longitude}`;
+
+              // Format lebih detail: IP - Kota, Wilayah, Negara (ISP/Provider) + Link Maps
+              locationInfo = `${locData.ip} - ${locData.city}, ${locData.region}, ${locData.country_name} (${locData.org}) | 📍 Est: ${mapsLink}`;
+              console.log("VisitorTracker: Lokasi didapat:", locationInfo);
             } catch (e) {
               console.error("Gagal mengambil lokasi:", e);
             }
 
-            // --- DETEKSI DEVICE & BROWSER TERPISAH ---
-            const ua = navigator.userAgent;
-            let os = "Unknown OS";
-            if (ua.includes("Win")) os = "Windows";
-            else if (ua.includes("Mac")) os = "MacOS";
-            else if (ua.includes("Linux")) os = "Linux";
-            else if (ua.includes("Android")) os = "Android";
-            else if (ua.includes("like Mac")) os = "iOS";
-
-            let browser = "Unknown Browser";
-            if (ua.includes("Firefox")) browser = "Firefox";
-            else if (ua.includes("SamsungBrowser")) browser = "Samsung Internet";
-            else if (ua.includes("Opera") || ua.includes("OPR")) browser = "Opera";
-            else if (ua.includes("Trident")) browser = "Internet Explorer";
-            else if (ua.includes("Edge")) browser = "Edge";
-            else if (ua.includes("Chrome")) browser = "Chrome";
-            else if (ua.includes("Safari")) browser = "Safari";
-
-            // Format string agar terpisah jelas di Excel
-            const deviceInfoSeparated = `📱 Device: ${os} | 🌐 Browser: ${browser}`;
-
             // B. Kirim Data ke Google Spreadsheet (via Apps Script)
+            console.log("VisitorTracker: Mengirim data ke Google Sheet...");
             // Menggunakan URLSearchParams agar lebih stabil diterima Google Apps Script
             const data = new URLSearchParams();
             data.append("timestamp", new Date().toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' }));
             data.append("visitor_count", countData.count.toString());
             data.append("location", locationInfo);
-            data.append("device_info", deviceInfoSeparated); // Mengirim info yang sudah dipisah
+            data.append("device_info", navigator.userAgent);
 
             await fetch(GOOGLE_SCRIPT_URL, {
               method: "POST",
               body: data,
               mode: "no-cors" // Penting: mode no-cors agar tidak diblokir browser saat kirim ke Google Script
             });
+            console.log("VisitorTracker: Data terkirim (Mode No-CORS - tidak ada respon balik, tapi sukses dikirim).");
 
             // Tandai sesi ini sudah dihitung
             sessionStorage.setItem("hasVisitedSession", "true");
           }
         } else {
-          // Pengunjung lama (Refresh) - Hanya ambil data counter
+          console.log("VisitorTracker: Pengunjung lama. Hanya ambil data counter.");
           const countRes = await fetch(`https://api.counterapi.dev/v1/${NAMESPACE}/${KEY}`);
           const countData = await countRes.json();
           if (countData && countData.count) {
