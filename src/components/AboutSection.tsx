@@ -47,8 +47,9 @@ const AboutSection = () => {
               
               <p>
                Saya lebih aktif memperbarui kehidupan sehari-hari saya di Instagram daripada di LinkedIn.
-               Oh ya, satu hal lagi, ketika Anda tidak menemukan saya di dunia nyata,
-               itu berarti kehidupan saya hari ini berfokus pada memperbaiki kesalahan yang ada karena kesalahan ini sudah tertanam dalam darah saya🗿.
+               Oh ya satu hal lagi saya pernah membaca satu paragraf di buku yang bertuliskan, "Didunia ini tidak ada orang yang benar-benar gagal.
+               Bahwasanya hanya ada suatu proses sukses yang tertunda dan setiap orang mempunyai proses masing-masing,
+               di sela proses juga ada namanya gagal maupun kerugian dialah guru yang sebenarnya untuk menuju kesuksesan."
               </p>
             </div>
           </motion.div>

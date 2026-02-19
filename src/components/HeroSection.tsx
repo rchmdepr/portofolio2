@@ -39,7 +39,7 @@ const HeroSection = () => {
                 Hello I'am <br /> <span className="text-zinc-500">Rachmad</span>
               </h1>
               <h2 className="text-2xl lg:text-3xl font-medium text-zinc-400">
-                Good things take time
+                Aut viam inveniam aut faciam.
               </h2>
             </div>
             
