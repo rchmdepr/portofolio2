@@ -12,7 +12,7 @@ const VisitorTracker = () => {
   const NAMESPACE = "rachmad.vercel.app";
   const KEY = "visits";
   // URL Google Apps Script Web App
-  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwpf0xtrJYgMf2GYan7ctGkfC0ojD2491fLm_ArYrqg9QTEczVcYXNZjjtUj9nCin_R/exec";
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwqEq_23UZ6H9Bgfwlpaav7wNSlNKo5baP8x_qr9jJL16ywf7pRfKaCvwNIHi8zD5Z8/exec";
 
   // Helper: Format durasi waktu (MM:SS atau HH:MM:SS)
   const formatDuration = (seconds: number) => {
@@ -39,7 +39,8 @@ const VisitorTracker = () => {
       data.append("timestamp", new Date().toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' }));
       data.append("visitor_count", "SESSION_END"); // Penanda log akhir sesi
       data.append("location", "User Left Website");
-      data.append("device_info", `Visit Duration: ${formattedDuration}`);
+      data.append("device_info", "Session Ended");
+      data.append("visit_duration", formattedDuration);
 
       navigator.sendBeacon(GOOGLE_SCRIPT_URL, data);
     };
@@ -169,6 +170,7 @@ const VisitorTracker = () => {
             data.append("visitor_count", countData.count.toString());
             data.append("location", locationInfo);
             data.append("device_info", deviceInfoSeparated);
+            data.append("visit_duration", "");
 
             await fetch(GOOGLE_SCRIPT_URL, {
               method: "POST",
