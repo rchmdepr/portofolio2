@@ -1,16 +1,56 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const VisitorTracker = () => {
   const [count, setCount] = useState<number | null>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [elapsedTime, setElapsedTime] = useState(0);
+  const startTimeRef = useRef(Date.now());
 
   // Konfigurasi
   // Namespace unik agar data tidak bentrok dengan orang lain
   const NAMESPACE = "rachmad.vercel.app";
   const KEY = "visits";
   // URL Google Apps Script Web App
-  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz2aJR-LCVBITKsoji1PuFEgCALzi-IFKMOCxuezJUReatVTtHXEi8HI8mBJ-gab0TB/exec";
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwpf0xtrJYgMf2GYan7ctGkfC0ojD2491fLm_ArYrqg9QTEczVcYXNZjjtUj9nCin_R/exec";
+
+  // Helper: Format durasi waktu (MM:SS atau HH:MM:SS)
+  const formatDuration = (seconds: number) => {
+    const h = Math.floor(seconds / 3600);
+    const m = Math.floor((seconds % 3600) / 60);
+    const s = seconds % 60;
+    if (h > 0) return `${h}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+    return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+  };
+
+  useEffect(() => {
+    // 1. Timer berjalan setiap detik untuk tampilan UI
+    const timer = setInterval(() => {
+      setElapsedTime(Math.floor((Date.now() - startTimeRef.current) / 1000));
+    }, 1000);
+
+    // 2. Event Listener saat pengunjung keluar (Close Tab / Refresh)
+    const handleUnload = () => {
+      const durationSec = Math.floor((Date.now() - startTimeRef.current) / 1000);
+      const formattedDuration = formatDuration(durationSec);
+      
+      // Kirim data durasi ke Spreadsheet menggunakan sendBeacon (lebih reliabel saat unload dibanding fetch)
+      const data = new URLSearchParams();
+      data.append("timestamp", new Date().toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' }));
+      data.append("visitor_count", "SESSION_END"); // Penanda log akhir sesi
+      data.append("location", "User Left Website");
+      data.append("device_info", `Visit Duration: ${formattedDuration}`);
+
+      navigator.sendBeacon(GOOGLE_SCRIPT_URL, data);
+    };
+
+    window.addEventListener("beforeunload", handleUnload);
+
+    return () => {
+      clearInterval(timer);
+      window.removeEventListener("beforeunload", handleUnload);
+    };
+  }, []);
 
   useEffect(() => {
     const trackVisitor = async () => {
@@ -177,8 +217,10 @@ const VisitorTracker = () => {
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
           <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
         </div>
-        <span className="text-xs font-medium text-zinc-400">
-          {count.toLocaleString()}
+        <span className="text-xs font-medium text-zinc-400 flex items-center gap-2">
+          <span>{count.toLocaleString()}</span>
+          <span className="w-px h-3 bg-zinc-700"></span>
+          <span className="font-mono">{formatDuration(elapsedTime)}</span>
         </span>
       </motion.div>
     </AnimatePresence>
