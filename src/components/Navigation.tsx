@@ -424,6 +424,12 @@ const Navigation = () => {
               Activity
             </button>
             <button
+              onClick={() => scrollToSection('certificates')}
+              className="text-foreground hover:text-primary transition-colors"
+            >
+              Certificates
+            </button>
+            <button
             onClick={() => scrollToSection('contact')}
               className="text-foreground hover:text-primary transition-colors"
             >
@@ -463,7 +469,7 @@ const Navigation = () => {
 
             {/* Menu Links */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-center">
-                {['about', 'experience', 'skills', 'projects', 'download-cv', 'activities', 'contact'].map((section) => (
+                {['about', 'experience', 'skills', 'projects', 'download-cv', 'activities', 'certificates', 'contact'].map((section) => (
                     <button
                         key={section}
                         onClick={() => { scrollToSection(section); setIsMenuOpen(false); }}

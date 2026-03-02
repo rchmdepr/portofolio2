@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 
 interface ActivityItem {
@@ -58,14 +57,34 @@ const PictActivity = () => {
   // Menggunakan lh3.googleusercontent.com agar lebih stabil dan menghindari error 403 Forbidden
   const getImageUrl = (id: string) => `https://lh3.googleusercontent.com/d/${id}`;
 
-  const scroll = (direction: 'left' | 'right') => {
-    if (scrollRef.current) {
-      const { current } = scrollRef;
-      const scrollAmount = current.clientWidth * 0.7; // Geser 70% dari lebar container
-      current.scrollBy({
-        left: direction === 'left' ? -scrollAmount : scrollAmount,
-        behavior: 'smooth'
-      });
+  // Logic Infinite Scroll Manual
+  const infiniteActivities = activities.length > 0 ? [...activities, ...activities, ...activities] : [];
+
+  useEffect(() => {
+    // Saat data dimuat, langsung posisikan scroll di tengah (Awal Set B)
+    if (scrollRef.current && activities.length > 0) {
+      const container = scrollRef.current;
+      const oneSetWidth = container.scrollWidth / 3;
+      
+      container.scrollLeft = oneSetWidth;
+    }
+  }, [activities]);
+
+  const handleScroll = () => {
+    const container = scrollRef.current;
+    if (!container || activities.length === 0) return;
+
+    const totalWidth = container.scrollWidth;
+    const oneSetWidth = totalWidth / 3;
+    const scrollLeft = container.scrollLeft;
+
+    // Jika user scroll terlalu ke kiri (masuk ke Set A), lempar balik ke Set B
+    if (scrollLeft < oneSetWidth * 0.1) {
+      container.scrollLeft = scrollLeft + oneSetWidth;
+    }
+    // Jika user scroll terlalu ke kanan (masuk ke Set C), lempar balik ke Set B
+    else if (scrollLeft > oneSetWidth * 2.5) {
+       container.scrollLeft = scrollLeft - oneSetWidth;
     }
   };
 
@@ -97,11 +116,12 @@ const PictActivity = () => {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
           ref={scrollRef}
-          className="flex overflow-x-auto gap-6 pb-12 snap-x snap-mandatory max-w-5xl mx-auto px-4 [&::-webkit-scrollbar]:hidden"
+          onScroll={handleScroll}
+          className="flex overflow-x-auto gap-6 pb-12 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
-          {activities.map((item, index) => (
-            <div key={item.id} className="min-w-[85%] md:min-w-[60%] flex-shrink-0 snap-center group">
+          {infiniteActivities.map((item, index) => (
+            <div key={`${item.id}-${index}`} className="min-w-[85%] md:min-w-[60%] flex-shrink-0 snap-center group">
               
               {/* Elegant Tech Card */}
               <div className="bg-zinc-900/50 backdrop-blur-sm border border-zinc-800 rounded-2xl p-4 shadow-2xl hover:border-zinc-600 transition-all duration-500 relative overflow-hidden group-hover:bg-zinc-900/80">
@@ -138,31 +158,6 @@ const PictActivity = () => {
               </div>
             </div>
           ))}
-        </motion.div>
-
-        {/* Tombol Navigasi Modern */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          viewport={{ once: true }}
-          className="flex justify-center gap-6 mt-8"
-        >
-          <button 
-            onClick={() => scroll('left')}
-            className="group p-4 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white hover:border-zinc-600 hover:bg-zinc-800 transition-all duration-300"
-            aria-label="Previous slide"
-          >
-            <ChevronLeft className="w-6 h-6" />
-          </button>
-          
-          <button 
-            onClick={() => scroll('right')}
-            className="group p-4 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white hover:border-zinc-600 hover:bg-zinc-800 transition-all duration-300"
-            aria-label="Next slide"
-          >
-            <ChevronRight className="w-6 h-6" />
-          </button>
         </motion.div>
       </div>
     </section>
