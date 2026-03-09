@@ -88,7 +88,7 @@ const HeroSection = () => {
                               </div>
                               <div className="flex flex-col">
                                 <span className="font-medium text-xs">Main Github</span>
-                                <span className="text-[10px] text-zinc-500">Personal.</span>
+                                <span className="text-[10px] text-zinc-500">Personal</span>
                               </div>
                               <ExternalLink size={12} className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-zinc-500" />
                             </a>
