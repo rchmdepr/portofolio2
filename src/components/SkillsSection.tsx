@@ -2,12 +2,14 @@ import { motion } from "framer-motion";
 
 const SkillsSection = () => {
   const skills = [
-    { name: "Git", icon: "📁" },
-    { name: "Next.js", icon: "▲" },
-    { name: "Vercel", icon: "📚" },
-    { name: "Node.js", icon: "⬢" },
-    { name: "Vite.io", icon: "🔌" },
-
+    { name: "VS Code", icon: " 💻 ", url: "https://code.visualstudio.com//" },
+    { name: "Flutter", icon: " 📱 ", url: "https://flutter.dev/" },
+    { name: "Git", icon: "🔶", url: "https://git-scm.com/" },
+    { name: "Next.js", icon: "✨ ", url: "https://nextjs.org/" },
+    { name: "Vercel", icon: "🛠️", url: "https://vercel.com/" },
+    { name: "Node.js", icon: "☕", url: "https://nodejs.org/" },
+    { name: "Vite.io", icon: "⚡️", url: "https://vitejs.dev/" },
+    { name: "Google Cloud", icon: " ☁️ ", url: "https://cloud.google.com/" },
   ];
 
   return (
@@ -30,14 +32,17 @@ const SkillsSection = () => {
             My <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-red-800">Skills</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Technologies and tools I use to build digital products.
+            Beberapa tools yang saya gunakan untuk membuat produk digital.
           </p>
         </motion.div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-4xl mx-auto">
           {skills.map((skill, index) => (
-            <motion.div
+            <motion.a
               key={index}
+              href={skill.url}
+              target="_blank"
+              rel="noopener noreferrer"
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3, delay: index * 0.1 }}
@@ -51,7 +56,7 @@ const SkillsSection = () => {
                 <div className="text-4xl mb-4 transform group-hover:scale-110 transition-transform duration-300 inline-block drop-shadow-sm">{skill.icon}</div>
                 <h3 className="font-semibold text-lg text-foreground group-hover:text-primary transition-colors">{skill.name}</h3>
               </div>
-            </motion.div>
+            </motion.a>
           ))}
         </div>
       </div>
